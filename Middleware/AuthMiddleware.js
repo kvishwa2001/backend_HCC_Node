@@ -8,7 +8,7 @@ exports.verifytoken = (req, res, next) => {
         return res.status(401).json ({error:'Access Defined'});
     try {
         // Decode the token using the secret key
-        const decoded = jwt.verify(token,'This-is-Any-Random-Key');
+        const decoded = jwt.verify(token,'HCC-COLLECTION-PROJECT');
         req.user_id = decoded.user_id; // Assign decoded values to req object
         req.email = decoded.email;
         req.role = decoded.role;

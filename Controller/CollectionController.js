@@ -83,10 +83,8 @@ exports.createCollectionarrays = [
     UserImages.single('picture'), // This handles the file upload for the 'picture' field
     async (req, res) => {
         try {
-            // req.file contains the uploaded file
-            const picturePath = req.file ? req.file.path : null; // Path of the uploaded file (null if no file)
-
-            // Collect form data and add picture path to it
+            
+            const picturePath = req.file ? req.file.path : null;
             const data = {
                 client_name: req.body.client_name,
                 client_contact: req.body.client_contact,
@@ -102,20 +100,26 @@ exports.createCollectionarrays = [
                 send: req.body.send,
                 sent: req.body.sent,
                 user_id: req.body.user_id,
-                picture: picturePath // Save the path of the uploaded file
+                picture: picturePath,
+                today_rate:req.body.today_rate,
+                accno: req.body.accno,
+                bank_name: req.body.bank_name,
+                ifsc_code: req.body.ifsc_code,
+                accoun_type:req.body.accoun_type,
+                name_of_the_beneficiary:req.body.name_of_the_beneficiary,
+                address_of_the_beneficiary:req.body.address_of_the_beneficiary,
+                sender_information:req.body.sender_information
             };
-
-            // Call the createarrays method (assuming this function inserts data into your database)
-            const result = await Collectiondata.createarrays(data);
-            
-            // Send success response with the result (ID of the newly inserted data)
-            res.status(200).json({ message: 'Data inserted successfully', id: result });
+            const result = await Collectiondata.createarrays(data);            
+            res.status(200).json({ message: 'Data inserted successfully', id: result,
+                 Data:data
+             });
         } catch (error) {
-            // If an error occurs, send a failure response with the error message
             res.status(500).json({ message: 'Error inserting data', error: error.message });
         }
     }
 ];
+
 
 
 
@@ -261,6 +265,18 @@ exports.list = async (req, res) => {
     } catch (error) {
         console.log("List Details Error", error)
         res.status(500).json("Error Accured In List")
+    }
+}
+
+exports.updatebankdetails = async (req, res) => {
+    try {
+
+        await Collectiondata.updatebankdetails(req.params.id, req.body);
+        res.status(200).json({ message: 'Bank details updated successfully' });
+    } catch (error) {
+
+        console.error(error);
+        res.status(400).json({ error: 'Failed to update bank details' });
     }
 }
 

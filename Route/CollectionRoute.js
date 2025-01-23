@@ -25,6 +25,7 @@ router.get ('/acc_list',verifytoken,staffonly,CollectionController.list);
 router.get('/acc_fetchlist',CollectionController.fetchlist);
 router.delete('/acc_delete/:id',CollectionController.delete)
 router.put('/acc_updated/:id',CollectionController.update)//
+router.put ('/updated_bankdetails/:id',CollectionController.updatebankdetails)
 router.put ('/acc_clientupdated/:id',CollectionController.clientupdate)
 router.put ("/client_IDupdated/:id",CollectionController.pushClientID)
 router.post('/push/:client_id',CollectionController.push)

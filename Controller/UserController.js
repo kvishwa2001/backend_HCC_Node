@@ -110,8 +110,8 @@ exports.loginUser = async (req, res) => {
             {user_id : user.user_id,
                 email : user.email,
                 role : user.role},
-                'This-is-Any-Random-Key',
-                {expiresIn:'30m'}
+                'HCC-COLLECTION-PROJECT'
+                // {expiresIn:'30m'}
         )
         res.status(200).send({
             userFound: true,
