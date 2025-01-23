@@ -7,6 +7,7 @@ const http = require("http");
 
 const port = process.env.PORT || 14926;
 
+
 console.log(process.env.DATABASE_URL); // Access your DATABASE_URL
 console.log(process.env.API_KEY); // Access your API_KEY
 console.log(process.env.PORT); // Access your PORT
